@@ -221,16 +221,27 @@ class GoogleMapsPuppeteerScraper {
       if (emailHandle) {
         let email = await this.page.evaluate(el => el.getAttribute('href'), emailHandle);
         if (email) {
-          details.email = email.replace("mailto:", "");
+          email = email.replace("mailto:", "").trim();
+          // If the email is the default one, set as N/A
+          if (email === "robert@broofa.com") {
+            details.email = "N/A";
+          } else {
+            details.email = email;
+          }
           console.log("Email:", details.email);
+        } else {
+          details.email = "N/A";
         }
       } else {
         const content = await this.page.content();
         const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
         const matches = content.match(emailRegex);
         if (matches && matches.length > 0) {
-          details.email = matches[0];
+          const foundEmail = matches[0].trim();
+          details.email = foundEmail === "robert@broofa.com" ? "N/A" : foundEmail;
           console.log("Email from text:", details.email);
+        } else {
+          details.email = "N/A";
         }
       }
     } catch (e) {

@@ -19,7 +19,7 @@ Google Map Scraper is an advanced, headless scraper built using Puppeteer for ex
   Automatically accepts cookie pop-ups to ensure uninterrupted scraping.
 
 - **Smart Email Filtering:**  
-  If no email is found or if the email is the default placeholder (`robert@broofa.com`), the script sets the email field to `N/A`.
+  If no email is found, the script sets the email field to `N/A`.
 
 - **Scrolling & Lazy Loading Support:**  
   Automatically scrolls the results list to load additional entries.

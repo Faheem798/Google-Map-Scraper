@@ -439,9 +439,8 @@ async function main() {
   await scraper.init();
   const results = await scraper.searchBusinesses(niche, region, maxResults);
   // Export results to CSV and XLSX
-  await scraper.exportToCsv(results, "results.csv");
-  await scraper.exportToXlsx(results, "results.xlsx");
+  await scraper.exportToCsv(results, "Output/results.csv");
+  await scraper.exportToXlsx(results, "Output/results.xlsx");
   await scraper.close();
 }
-
 main();

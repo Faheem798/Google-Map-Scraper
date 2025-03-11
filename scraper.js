@@ -9,7 +9,6 @@ class GoogleMapsPuppeteerScraper {
   }
 
   async init() {
-    // Launch browser with desired arguments
     this.browser = await puppeteer.launch({
       headless: this.headless,
       args: [
@@ -193,8 +192,6 @@ class GoogleMapsPuppeteerScraper {
           continue;
         }
       }
-      
-      // Extract Category
       const categorySelectors = [
         "button[jsaction*='category']",
         "span.DkEaL",
@@ -216,13 +213,11 @@ class GoogleMapsPuppeteerScraper {
         }
       }
       
-      // Extract Email using mailto links or regex from page content
       const emailHandle = await this.page.$("a[href^='mailto:']");
       if (emailHandle) {
         let email = await this.page.evaluate(el => el.getAttribute('href'), emailHandle);
         if (email) {
           email = email.replace("mailto:", "").trim();
-          // If the email is the default one, set as N/A
           if (email === "robert@broofa.com") {
             details.email = "N/A";
           } else {
@@ -410,7 +405,6 @@ class GoogleMapsPuppeteerScraper {
       return false;
     }
     try {
-      // Convert JSON to worksheet and then to workbook
       const worksheet = XLSX.utils.json_to_sheet(businesses);
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, "Results");

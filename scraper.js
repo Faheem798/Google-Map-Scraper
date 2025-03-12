@@ -9,6 +9,7 @@ class GoogleMapsPuppeteerScraper {
   }
 
   async init() {
+    // Launch the browser with the specified options.
     this.browser = await puppeteer.launch({
       headless: this.headless,
       args: [
@@ -192,6 +193,8 @@ class GoogleMapsPuppeteerScraper {
           continue;
         }
       }
+      
+      // Extract Category
       const categorySelectors = [
         "button[jsaction*='category']",
         "span.DkEaL",
@@ -213,16 +216,13 @@ class GoogleMapsPuppeteerScraper {
         }
       }
       
+     
       const emailHandle = await this.page.$("a[href^='mailto:']");
       if (emailHandle) {
         let email = await this.page.evaluate(el => el.getAttribute('href'), emailHandle);
         if (email) {
           email = email.replace("mailto:", "").trim();
-          if (email === "robert@broofa.com") {
-            details.email = "N/A";
-          } else {
-            details.email = email;
-          }
+          details.email = (email === "robert@broofa.com") ? "N/A" : email;
           console.log("Email:", details.email);
         } else {
           details.email = "N/A";
@@ -233,7 +233,7 @@ class GoogleMapsPuppeteerScraper {
         const matches = content.match(emailRegex);
         if (matches && matches.length > 0) {
           const foundEmail = matches[0].trim();
-          details.email = foundEmail === "robert@broofa.com" ? "N/A" : foundEmail;
+          details.email = (foundEmail === "robert@broofa.com") ? "N/A" : foundEmail;
           console.log("Email from text:", details.email);
         } else {
           details.email = "N/A";
@@ -280,14 +280,17 @@ class GoogleMapsPuppeteerScraper {
       }
       await this._scrollResults(scroll_count);
       
-      let businessElements = await this.page.$$(workingSelector);
-      console.log(`Found ${businessElements.length} business elements.`);
+      let initialElements = await this.page.$$(workingSelector);
+      let totalElements = initialElements.length;
       if (max_results > 0) {
-        businessElements = businessElements.slice(0, max_results);
+        totalElements = Math.min(totalElements, max_results);
       }
       
-      for (let i = 0; i < businessElements.length; i++) {
+      for (let i = 0; i < totalElements; i++) {
         try {
+          const currentElements = await this.page.$$(workingSelector);
+          if (i >= currentElements.length) break;
+          const element = currentElements[i];
           const business = {};
           const nameSelectors = [
             "div.qBF1Pd",
@@ -299,7 +302,7 @@ class GoogleMapsPuppeteerScraper {
           let nameFound = false;
           for (const sel of nameSelectors) {
             try {
-              const handle = await businessElements[i].$(sel);
+              const handle = await element.$(sel);
               if (handle) {
                 const nameText = await this.page.evaluate(el => el.innerText, handle);
                 if (nameText) {
@@ -317,9 +320,7 @@ class GoogleMapsPuppeteerScraper {
             console.log(`Could not extract name for result ${i + 1}`);
             continue;
           }
-          
-          // Click element to open business details
-          const clickableSelectors = [
+              const clickableSelectors = [
             "a",
             "div[role='button']",
             "div[jsaction*='placeCard']",
@@ -328,7 +329,7 @@ class GoogleMapsPuppeteerScraper {
           let clicked = false;
           for (const sel of clickableSelectors) {
             try {
-              const clickable = await businessElements[i].$(sel);
+              const clickable = await element.$(sel);
               if (clickable) {
                 try {
                   await clickable.click();
@@ -443,9 +444,9 @@ async function main() {
   const scraper = new GoogleMapsPuppeteerScraper(false);
   await scraper.init();
   const results = await scraper.searchBusinesses(niche, region, maxResults);
-  // Export results to CSV and XLSX
   await scraper.exportToCsv(results, "Output/results.csv");
   await scraper.exportToXlsx(results, "Output/results.xlsx");
   await scraper.close();
 }
+
 main();

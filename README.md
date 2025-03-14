@@ -18,9 +18,6 @@ Google Map Scraper is an advanced, headless scraper built using Puppeteer for ex
 - **Cookie Consent Handling:**  
   Automatically accepts cookie pop-ups to ensure uninterrupted scraping.
 
-- **Smart Email Filtering:**  
-  If no email is found, the script sets the email field to `N/A`.
-
 - **Scrolling & Lazy Loading Support:**  
   Automatically scrolls the results list to load additional entries.
 

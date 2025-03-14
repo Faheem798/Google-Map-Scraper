@@ -216,8 +216,7 @@ class GoogleMapsPuppeteerScraper {
         }
       }
       
-     
-      const emailHandle = await this.page.$("a[href^='mailto:']");
+    const emailHandle = await this.page.$("a[href^='mailto:']");
       if (emailHandle) {
         let email = await this.page.evaluate(el => el.getAttribute('href'), emailHandle);
         if (email) {
@@ -280,6 +279,7 @@ class GoogleMapsPuppeteerScraper {
       }
       await this._scrollResults(scroll_count);
       
+      // Initially get the number of business elements
       let initialElements = await this.page.$$(workingSelector);
       let totalElements = initialElements.length;
       if (max_results > 0) {
@@ -288,10 +288,12 @@ class GoogleMapsPuppeteerScraper {
       
       for (let i = 0; i < totalElements; i++) {
         try {
+
           const currentElements = await this.page.$$(workingSelector);
           if (i >= currentElements.length) break;
           const element = currentElements[i];
           const business = {};
+          
           const nameSelectors = [
             "div.qBF1Pd",
             "span.fontHeadlineSmall",
@@ -320,7 +322,9 @@ class GoogleMapsPuppeteerScraper {
             console.log(`Could not extract name for result ${i + 1}`);
             continue;
           }
-              const clickableSelectors = [
+          
+          // Click to open business details using multiple selectors
+          const clickableSelectors = [
             "a",
             "div[role='button']",
             "div[jsaction*='placeCard']",

@@ -1,86 +1,37 @@
-name,email,address,phone,website,category
-"New York Dental Office","N/A","","","",""
-"Sky Dental","N/A","
-111 Broadway Suite 1304, New York, NY 10006, United States","
-+1 212-600-1996","https://skydentalnyc.com/?utm_campaign=gmb","Dentist"
-"Diamond District Dental NYC","N/A","
-10 W 46th St #1401, New York, NY 10036, United States","
-+1 212-759-5595","https://www.dddentalnyc.com/","Dentist"
-"New York Dental Office","N/A","
-245 E 63rd St #110, New York, NY 10065, United States","
-+1 212-548-3261","https://www.newyorkdentaloffice.com/","Dentist"
-"New York General Dentistry","N/A","
-133 E 58th St Ste 409, New York, NY 10022, United States","
-+1 212-838-0842","https://newyorkgeneraldentistry.com/?utm_source=GMBlisting&utm_medium=organic","Dental clinic"
-"NYC Smile Spa","N/A","
-30 E 60th St Suite 1201, New York, NY 10022, United States","
-+1 646-374-2242","https://www.nycsmilespa.com/","Cosmetic dentist"
-"New York Family Dental Arts","N/A","
-200 E 72nd St, New York, NY 10021, United States","
-+1 212-628-3300","http://www.dentalartsny.com/","Dentist"
-"My NYC Dentist - 34th Street Dental","N/A","
-225 W 35th St # 2, New York, NY 10001, United States","
-+1 212-564-8164","http://www.mynyc-dentist.com/","Dentist"
-"Midtown Dental Care Associates","N/A","
-12 E 41st St suite 1100, New York, NY 10017, United States","
-+1 212-685-4730","https://www.midtowndentalcareassociates.com/?utm_source=gmb&utm_medium=organic","Dentist"
-"209 NYC Dental","N/A","
-209 E 56th St 1st floor, New York, NY 10022, United States","
-+1 646-493-6891","","Dentist"
-"Sachar Dental NYC","N/A","
-20 E 46th St Rm 1301, New York, NY 10017, United States","
-+1 212-752-1163","https://www.sachardental.com/","Dentist"
-"Advanced Dental Arts NYC - LANAP Specialist","N/A","
-55 E 9th St, New York, NY 10003, United States","
-+1 212-388-1170","https://advanceddentalartsnyc.com/","Dentist"
-"Studio Smiles","N/A","
-41 Park Ave # 1C, New York, NY 10016, United States","
-+1 646-470-1376","http://www.studiosmilesnyc.com/","Dentist"
-"Expert Dental - Midtown","N/A","
-110 E 40th St #104, New York, NY 10016, United States","
-+1 212-763-3383","https://www.expertdentalnyc.com/","Dentist"
-"New York DMD","N/A","
-115 E 61st St Suite 12A, New York, NY 10065, United States","
-+1 917-284-9680","https://newyorkdmd.com/?utm_source=GMB&utm_medium=organic&utm_campaign=DevOptimization&utm_content=Website","Dentist"
-"Central Park Dentistry","N/A","
-30 Central Park S #2b, New York, NY 10019, United States","
-+1 212-486-6211","http://cpsdent.com/","Dentist"
-"Midtown Dental Group Fashion District","N/A","
-241 W 37th St Ground Floor, New York, NY 10018, United States","
-+1 212-730-4440","http://www.midtowndentalgroup.com/","Dentist"
-"New York Dental Studio","N/A","
-30 E 60th St suite 2402, New York, NY 10022, United States","
-+1 212-588-1809","https://www.nydentalstudio.com/","Dentist"
-"Smile Arts of NY","N/A","
-30 E 40th St Ground Floor #105, New York, NY 10016, United States","
-+1 212-537-6923","http://www.smileartsofny.com/","Cosmetic dentist"
-"Village Dental NYC","N/A","
-77 E 12th St, New York, NY 10003, United States","
-+1 315-860-0238","https://villagedentalnyc.com/","Dentist"
-"Astoria Modern Family Dental","N/A","
+name,address,phone,website,category,email
+"Astoria Modern Family Dental","
 31-56 Steinway St, Astoria, NY 11103, United States","
-+1 718-721-4700","https://www.astoriamodernfamilydental.com/","Dentist"
-"Sky Dental","N/A","
++1 718-721-4700","https://www.astoriamodernfamilydental.com/","Dentist","N/A"
+"Sky Dental","
 111 Broadway Suite 1304, New York, NY 10006, United States","
-+1 212-600-1996","https://skydentalnyc.com/?utm_campaign=gmb","Dentist"
-"Park Smiles NYC Cosmetic Dentistry","N/A","
++1 212-600-1996","https://skydentalnyc.com/?utm_campaign=gmb","Dentist","N/A"
+"209 NYC Dental","
+209 E 56th St 1st floor, New York, NY 10022, United States","
++1 646-493-6891","","Dentist","N/A"
+"Pearl Dental NYC","
+233 Broadway Suite 1801, New York, NY 10279, United States","
++1 212-344-9317","https://www.pearldentalnyc.com/","Dental clinic","N/A"
+"New York General Dentistry","
+133 E 58th St Ste 409, New York, NY 10022, United States","
++1 212-838-0842","https://newyorkgeneraldentistry.com/?utm_source=GMBlisting&utm_medium=organic","Dental clinic","N/A"
+"Park Smiles NYC Cosmetic Dentistry","
 1175 Park Ave # 1d, New York, NY 10128, United States","
-+1 929-209-3936","https://www.parksmilesnyc.com/?utm_campaign=gmb","Cosmetic dentist"
-"SLim Dental","N/A","
-30 E 37th St, New York, NY 10016, United States","
-+1 646-727-4188","https://www.slimdental.com/contact-us/dentist-murray-hill/","Dentist"
-"Dentistry For Health New York","N/A","
-120 East 56th Street 12th Floor, 120 E 56th St #12, New York, NY 10022, United States","
-+1 917-477-7771","https://dentistryforhealthny.com/","Dentist"
-"Manhattan Dental Studio","N/A","
-358 5th Ave #1005, New York, NY 10001, United States","
-+1 212-685-2476","http://www.manhattandentalstudio.com/","Dentist"
-"New York Smile Institute","N/A","
-693 5th Ave 14th floor, New York, NY 10022, United States","
-+1 212-319-6363","https://www.nysi.org/","Dentist"
-"Better Living through Dentistry : Manhattan","N/A","
-155 W 68th St #228, New York, NY 10023, United States","
-+1 212-724-6280","http://www.implantnyc.com/","Dental implants periodontist"
-"Wall Street Dental Spa - Financial District","N/A","
-30 Wall St #720, New York, NY 10005, United States","
-+1 646-849-6916","https://wallstdentalspanyc.com/","Dentist"
++1 929-209-3936","https://www.parksmilesnyc.com/?utm_campaign=gmb","Cosmetic dentist","N/A"
+"New York Dental Studio","
+30 E 60th St suite 2402, New York, NY 10022, United States","
++1 212-588-1809","https://www.nydentalstudio.com/","Dentist","N/A"
+"City Dental Group NYC","
+11 Broadway Lobby 4, New York, NY 10004, United States","
++1 212-425-0505","https://citydentalnyc.com/?utm_source=gbp&utm_medium=organic&utm_campaign=gbp-listing","Dentist","N/A"
+"NYCDENTAL","
+1317 3rd Ave 2nd Floor, New York, NY 10021, United States","
++1 212-348-5492","https://nycdent.com/","Dentist","N/A"
+"Sachar Dental NYC","
+20 E 46th St Rm 1301, New York, NY 10017, United States","
++1 212-752-1163","https://www.sachardental.com/","Dentist","N/A"
+"212 Dental Care","
+286 Madison Ave 10th Floor, New York, NY 10017, United States","
++1 888-506-9583","http://212dentalcare.com/","Dental clinic","N/A"
+"My NYC Dentist - Hudson Street Dental","
+90 Vandam St, New York, NY 10013, United States","
++1 212-359-0064","http://mynyc-dentist.com/","Dental clinic","N/A"

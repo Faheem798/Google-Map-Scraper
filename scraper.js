@@ -9,26 +9,30 @@ class GoogleMapsPuppeteerScraper {
   }
 
   async init() {
-    // Launch the browser with the specified options.
-    this.browser = await puppeteer.launch({
-      headless: this.headless,
-      args: [
-        '--window-size=1920,1080',
-        '--disable-notifications',
-        '--disable-infobars',
-        '--start-maximized',
-        '--disable-extensions',
-        '--disable-blink-features=AutomationControlled',
-        '--disable-dev-shm-usage',
-        '--no-sandbox'
-      ],
-    });
-    this.page = await this.browser.newPage();
-    await this.page.setViewport({ width: 1920, height: 1080 });
-    await this.page.setUserAgent(
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
-      "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
-    );
+    try {
+      this.browser = await puppeteer.launch({
+        headless: this.headless,
+        args: [
+          '--window-size=1920,1080',
+          '--disable-notifications',
+          '--disable-infobars',
+          '--start-maximized',
+          '--disable-extensions',
+          '--disable-blink-features=AutomationControlled',
+          '--disable-dev-shm-usage',
+          '--no-sandbox'
+        ],
+      });
+      this.page = await this.browser.newPage();
+      await this.page.setViewport({ width: 1920, height: 1080 });
+      await this.page.setUserAgent(
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+      );
+    } catch (err) {
+      console.error("Error during initialization:", err);
+      throw err;
+    }
   }
 
   async _acceptCookies() {
@@ -46,7 +50,8 @@ class GoogleMapsPuppeteerScraper {
           await new Promise(resolve => setTimeout(resolve, 1000));
           return true;
         }
-      } catch (e) {
+      } catch (err) {
+        console.error(`Error clicking cookie button with xpath ${xpath}:`, err);
         continue;
       }
     }
@@ -60,7 +65,8 @@ class GoogleMapsPuppeteerScraper {
         try {
           const element = await this.page.$(selector);
           if (element) return selector;
-        } catch (e) {
+        } catch (err) {
+          console.error(`Error checking selector ${selector}:`, err);
           continue;
         }
       }
@@ -70,7 +76,7 @@ class GoogleMapsPuppeteerScraper {
   }
 
   async _scrollResults(scrollCount) {
-    console.log(`Scrolling ${scrollCount} times to load more results...`);
+    console.log(`Scrolling ${scrollCount} time(s) to load more results...`);
     const scrollableSelectors = [
       "div[role='feed']",
       "div.m6QErb[role='region']",
@@ -79,26 +85,29 @@ class GoogleMapsPuppeteerScraper {
       "div.section-scrollbox"
     ];
     for (let i = 0; i < scrollCount; i++) {
-      let scrolled = false;
-      for (const selector of scrollableSelectors) {
-        try {
-          const scrollableDiv = await this.page.$(selector);
-          if (scrollableDiv) {
-            await this.page.evaluate(el => {
-              el.scrollTop = el.scrollHeight;
-            }, scrollableDiv);
-            scrolled = true;
-            console.log(`Scroll ${i + 1}: using selector ${selector}`);
-            break;
+      try {
+        let scrolled = false;
+        for (const selector of scrollableSelectors) {
+          try {
+            const scrollableDiv = await this.page.$(selector);
+            if (scrollableDiv) {
+              await this.page.evaluate(el => { el.scrollTop = el.scrollHeight; }, scrollableDiv);
+              scrolled = true;
+              console.log(`Scroll ${i + 1}: using selector ${selector}`);
+              break;
+            }
+          } catch (err) {
+            console.error(`Error scrolling with selector ${selector}:`, err);
+            continue;
           }
-        } catch (e) {
-          continue;
         }
+        if (!scrolled) {
+          await this.page.evaluate(() => window.scrollBy(0, 300));
+        }
+        await new Promise(resolve => setTimeout(resolve, 2500 + Math.random() * 1000));
+      } catch (err) {
+        console.error(`Error during scroll iteration ${i + 1}:`, err);
       }
-      if (!scrolled) {
-        await this.page.evaluate(() => window.scrollBy(0, 300));
-      }
-      await new Promise(resolve => setTimeout(resolve, 2500 + Math.random() * 1000));
     }
   }
 
@@ -107,10 +116,14 @@ class GoogleMapsPuppeteerScraper {
       await this.page.goBack({ waitUntil: 'networkidle2' });
       await new Promise(resolve => setTimeout(resolve, 1000));
       return true;
-    } catch (e) {
-      console.log("Failed to go back. Refreshing the page...");
-      await this.page.reload({ waitUntil: 'networkidle2' });
-      await new Promise(resolve => setTimeout(resolve, 3000));
+    } catch (err) {
+      console.error("Error going back, reloading page:", err);
+      try {
+        await this.page.reload({ waitUntil: 'networkidle2' });
+        await new Promise(resolve => setTimeout(resolve, 3000));
+      } catch (reloadErr) {
+        console.error("Error reloading page:", reloadErr);
+      }
       return false;
     }
   }
@@ -119,8 +132,7 @@ class GoogleMapsPuppeteerScraper {
     const details = {};
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Extract Address
+      // Address Extraction
       const addressSelectors = [
         "button[data-item-id^='address']",
         "[data-tooltip='Copy address']",
@@ -138,12 +150,13 @@ class GoogleMapsPuppeteerScraper {
               break;
             }
           }
-        } catch (e) {
+        } catch (err) {
+          console.error(`Error extracting address with selector ${selector}:`, err);
           continue;
         }
       }
       
-      // Extract Phone
+      // Phone Extraction
       const phoneSelectors = [
         "button[data-item-id^='phone']",
         "[data-tooltip='Copy phone number']",
@@ -167,12 +180,13 @@ class GoogleMapsPuppeteerScraper {
               break;
             }
           }
-        } catch (e) {
+        } catch (err) {
+          console.error(`Error extracting phone with selector ${selector}:`, err);
           continue;
         }
       }
       
-      // Extract Website
+      // Website Extraction
       const websiteSelectors = [
         "a[data-item-id^='authority']",
         "[data-tooltip='Open website']",
@@ -189,12 +203,13 @@ class GoogleMapsPuppeteerScraper {
               break;
             }
           }
-        } catch (e) {
+        } catch (err) {
+          console.error(`Error extracting website with selector ${selector}:`, err);
           continue;
         }
       }
       
-      // Extract Category
+      // Category Extraction
       const categorySelectors = [
         "button[jsaction*='category']",
         "span.DkEaL",
@@ -211,12 +226,15 @@ class GoogleMapsPuppeteerScraper {
               break;
             }
           }
-        } catch (e) {
+        } catch (err) {
+          console.error(`Error extracting category with selector ${selector}:`, err);
           continue;
         }
       }
       
-    const emailHandle = await this.page.$("a[href^='mailto:']");
+      // Email Extraction with Filter:
+      // If no email found or if email equals "robert@broofa.com", set to "N/A"
+      const emailHandle = await this.page.$("a[href^='mailto:']");
       if (emailHandle) {
         let email = await this.page.evaluate(el => el.getAttribute('href'), emailHandle);
         if (email) {
@@ -238,14 +256,15 @@ class GoogleMapsPuppeteerScraper {
           details.email = "N/A";
         }
       }
-    } catch (e) {
-      console.log("Error extracting business details:", e);
+    } catch (err) {
+      console.error("Error extracting business details:", err);
     }
     return details;
   }
 
   async searchBusinesses(query, region, max_results = 0) {
     const results = [];
+    const uniqueNames = new Set();
     const searchTerm = `${query} ${region}`;
     console.log(`Searching for: ${searchTerm}`);
     try {
@@ -253,9 +272,7 @@ class GoogleMapsPuppeteerScraper {
       await this._acceptCookies();
       const searchBoxSelector = "#searchboxinput";
       await this.page.waitForSelector(searchBoxSelector, { timeout: 15000 });
-      await this.page.evaluate(selector => {
-        document.querySelector(selector).value = "";
-      }, searchBoxSelector);
+      await this.page.evaluate(selector => { document.querySelector(selector).value = ""; }, searchBoxSelector);
       await this.page.type(searchBoxSelector, searchTerm);
       await this.page.keyboard.press("Enter");
       console.log("Search initiated, waiting for results...");
@@ -266,112 +283,135 @@ class GoogleMapsPuppeteerScraper {
         "div.bfdHYd",
         "div[role='feed'] > div"
       ];
-      const workingSelector = await this._waitForFirstElementPresent(resultSelectors, 10000);
+      let workingSelector = await this._waitForFirstElementPresent(resultSelectors, 10000);
       if (!workingSelector) {
         console.log("No results container found.");
         return results;
       }
       console.log("Results container found using:", workingSelector);
       
-      let scroll_count = 10;
-      if (max_results > 0) {
-        scroll_count = Math.max(1, Math.floor(max_results / 5));
-      }
-      await this._scrollResults(scroll_count);
+      // Initial scroll to load results.
+      await this._scrollResults(3);
       
-      // Initially get the number of business elements
-      let initialElements = await this.page.$$(workingSelector);
-      let totalElements = initialElements.length;
-      if (max_results > 0) {
-        totalElements = Math.min(totalElements, max_results);
-      }
-      
-      for (let i = 0; i < totalElements; i++) {
+      let previousCount = 0;
+      // Loop until no new elements are loaded or desired count reached.
+      while (true) {
+        let elements = [];
         try {
-
-          const currentElements = await this.page.$$(workingSelector);
-          if (i >= currentElements.length) break;
-          const element = currentElements[i];
-          const business = {};
-          
-          const nameSelectors = [
-            "div.qBF1Pd",
-            "span.fontHeadlineSmall",
-            "div.fontHeadlineSmall",
-            "span.vcAjh",
-            "h3"
-          ];
-          let nameFound = false;
-          for (const sel of nameSelectors) {
-            try {
-              const handle = await element.$(sel);
-              if (handle) {
-                const nameText = await this.page.evaluate(el => el.innerText, handle);
-                if (nameText) {
-                  business.name = nameText.trim();
-                  console.log(`Processing business ${i + 1}: ${business.name}`);
-                  nameFound = true;
-                  break;
-                }
-              }
-            } catch (e) {
-              continue;
-            }
-          }
-          if (!nameFound) {
-            console.log(`Could not extract name for result ${i + 1}`);
-            continue;
-          }
-          
-          // Click to open business details using multiple selectors
-          const clickableSelectors = [
-            "a",
-            "div[role='button']",
-            "div[jsaction*='placeCard']",
-            "div[jsaction*='click']"
-          ];
-          let clicked = false;
-          for (const sel of clickableSelectors) {
-            try {
-              const clickable = await element.$(sel);
-              if (clickable) {
-                try {
-                  await clickable.click();
-                  clicked = true;
-                  break;
-                } catch (e) {
-                  await this.page.evaluate(el => el.click(), clickable);
-                  clicked = true;
-                  break;
-                }
-              }
-            } catch (e) {
-              continue;
-            }
-          }
-          if (!clicked) {
-            console.log(`Could not click on element for: ${business.name}`);
-            continue;
-          }
-          await new Promise(resolve => setTimeout(resolve, 4000 + Math.random() * 2000));
-          const details = await this._extractBusinessDetails();
-          Object.assign(business, details);
-          if (Object.keys(business).length > 1) {
-            console.log(`Details obtained for: ${business.name}`);
-          } else {
-            console.log(`Only name obtained for: ${business.name}`);
-          }
-          results.push(business);
-          
-          await this._goBackToResults();
-          await new Promise(resolve => setTimeout(resolve, 2000 + Math.random() * 1000));
-        } catch (e) {
-          console.log(`Error processing result ${i + 1}: ${e}`);
+          elements = await this.page.$$(workingSelector);
+        } catch (err) {
+          console.error("Error fetching elements:", err);
         }
-        await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000));
+        console.log(`Found ${elements.length} elements so far.`);
+        // Process new elements that haven't been processed.
+        for (let i = results.length; i < elements.length; i++) {
+          try {
+            const currentElements = await this.page.$$(workingSelector);
+            if (i >= currentElements.length) break;
+            const element = currentElements[i];
+            const business = {};
+            
+            // Extract Business Name using multiple selectors.
+            const nameSelectors = [
+              "div.qBF1Pd",
+              "span.fontHeadlineSmall",
+              "div.fontHeadlineSmall",
+              "span.vcAjh",
+              "h3"
+            ];
+            let nameFound = false;
+            for (const sel of nameSelectors) {
+              try {
+                const handle = await element.$(sel);
+                if (handle) {
+                  const nameText = await this.page.evaluate(el => el.innerText, handle);
+                  if (nameText) {
+                    business.name = nameText.trim();
+                    nameFound = true;
+                    break;
+                  }
+                }
+              } catch (err) {
+                console.error(`Error extracting name with selector ${sel}:`, err);
+                continue;
+              }
+            }
+            if (!nameFound) {
+              console.log(`Could not extract name for result ${i + 1}`);
+              continue;
+            }
+            // Skip duplicate names.
+            if (uniqueNames.has(business.name)) {
+              console.log(`Duplicate found: ${business.name} - skipping`);
+              continue;
+            }
+            uniqueNames.add(business.name);
+            console.log(`Processing business ${i + 1}: ${business.name}`);
+            
+            // Click element to open business details.
+            const clickableSelectors = [
+              "a",
+              "div[role='button']",
+              "div[jsaction*='placeCard']",
+              "div[jsaction*='click']"
+            ];
+            let clicked = false;
+            for (const sel of clickableSelectors) {
+              try {
+                const clickable = await element.$(sel);
+                if (clickable) {
+                  try {
+                    await clickable.click();
+                    clicked = true;
+                    break;
+                  } catch (err) {
+                    console.error(`Error clicking with selector ${sel}:`, err);
+                    await this.page.evaluate(el => el.click(), clickable);
+                    clicked = true;
+                    break;
+                  }
+                }
+              } catch (err) {
+                console.error(`Error finding clickable with selector ${sel}:`, err);
+                continue;
+              }
+            }
+            if (!clicked) {
+              console.log(`Could not click on element for: ${business.name}`);
+              continue;
+            }
+            await new Promise(resolve => setTimeout(resolve, 4000 + Math.random() * 2000));
+            const details = await this._extractBusinessDetails();
+            Object.assign(business, details);
+            if (Object.keys(business).length > 1) {
+              console.log(`Details obtained for: ${business.name}`);
+            } else {
+              console.log(`Only name obtained for: ${business.name}`);
+            }
+            results.push(business);
+            
+            await this._goBackToResults();
+            await new Promise(resolve => setTimeout(resolve, 2000 + Math.random() * 1000));
+            if (max_results > 0 && results.length >= max_results) break;
+          } catch (err) {
+            console.error(`Error processing result ${i + 1}:`, err);
+          }
+          await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000));
+        }
+        if (max_results > 0 && results.length >= max_results) break;
+        let newElements = [];
+        try {
+          newElements = await this.page.$$(workingSelector);
+        } catch (err) {
+          console.error("Error fetching elements after scroll:", err);
+        }
+        if (newElements.length === previousCount) break;
+        previousCount = newElements.length;
+        console.log("Scrolling for more results...");
+        await this._scrollResults(1);
       }
-    } catch (e) {
-      console.log("Error during search:", e);
+    } catch (err) {
+      console.error("Error during search:", err);
     }
     return results;
   }
@@ -383,9 +423,7 @@ class GoogleMapsPuppeteerScraper {
     }
     try {
       const allKeys = new Set();
-      businesses.forEach(biz => {
-        Object.keys(biz).forEach(key => allKeys.add(key));
-      });
+      businesses.forEach(biz => { Object.keys(biz).forEach(key => allKeys.add(key)); });
       const fieldnames = Array.from(allKeys);
       let csvContent = fieldnames.join(",") + "\n";
       businesses.forEach(biz => {
@@ -398,8 +436,8 @@ class GoogleMapsPuppeteerScraper {
       fs.writeFileSync(filename, csvContent, { encoding: "utf-8" });
       console.log(`Data exported to '${filename}' successfully!`);
       return true;
-    } catch (e) {
-      console.log("Error exporting CSV:", e);
+    } catch (err) {
+      console.error("Error exporting CSV:", err);
       return false;
     }
   }
@@ -416,8 +454,8 @@ class GoogleMapsPuppeteerScraper {
       XLSX.writeFile(workbook, filename);
       console.log(`Data exported to '${filename}' successfully!`);
       return true;
-    } catch (e) {
-      console.log("Error exporting XLSX:", e);
+    } catch (err) {
+      console.error("Error exporting XLSX:", err);
       return false;
     }
   }
@@ -431,12 +469,8 @@ class GoogleMapsPuppeteerScraper {
 }
 
 async function main() {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-  const ask = (question) =>
-    new Promise(resolve => rl.question(question, answer => resolve(answer)));
+  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+  const ask = (question) => new Promise(resolve => rl.question(question, answer => resolve(answer)));
   
   const niche = await ask("Enter the business niche (category) to search for: ");
   const region = await ask("Enter the region: ");
@@ -445,11 +479,17 @@ async function main() {
   if (isNaN(maxResults)) maxResults = 0;
   rl.close();
 
+  // Ensure output folder exists
+  const outputDir = "Output";
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir);
+  }
+
   const scraper = new GoogleMapsPuppeteerScraper(false);
   await scraper.init();
   const results = await scraper.searchBusinesses(niche, region, maxResults);
-  await scraper.exportToCsv(results, "Output/results.csv");
-  await scraper.exportToXlsx(results, "Output/results.xlsx");
+  await scraper.exportToCsv(results, `${outputDir}/results.csv`);
+  await scraper.exportToXlsx(results, `${outputDir}/results.xlsx`);
   await scraper.close();
 }
 

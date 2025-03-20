@@ -1,72 +1,89 @@
-name,address,phone,website,category,email
-"King Pest Control | Termite Treatment Services | Termite Control Lahore | Pest Control in Lahore","
-613-G Link Dhobi Ghat Rd, near Kashmir Bakers, Model Town Extension Block Q Model Town, Lahore, 54700, Pakistan","
-+92 300 9487991","https://kingpestcontrolpk.com/","Pest control service","N/A"
-"Shah Trading Corporation","
-154 Lahore – Kasur Rd, Ichhra Lahore, 54000, Pakistan","
-+92 331 4443888","http://www.shahtradingcorp.com/","Pest control service","N/A"
-"Tahir Termite Control Services Private Limited Water Tank Cleaning Services in Lahore","
-13, Sector XX BLOCK XX DHA Phase 3, Lahore, 54810, Pakistan","
-+92 300 8000036","https://tts.com.pk/","Pest control service","N/A"
-"Power Max - Al-Falah Trading Company","
-House No. 13/B-I, Block E2, Gulberg-III,, Lahore, Pakistan, Pakistan","
-+92 300 4150567","http://pages.ebizlahore.com/Power-Max-Termite-Proofing-Fumigation-Lahore-Pakistan.htm","Pest control service","N/A"
-"Terminix Termite Control Pakistan","
-Office # 80/G LDA, Model Town Extension Block N Model Town, Lahore, 54000, Pakistan","
-+92 300 8881780","http://www.pestkillr.com/","Pest control service","N/A"
-"Termite and pest control Shield Chemicals","
-272-Y, phase, 3 commercial Defence Rd, Sector Y DHA Phase 3, Lahore, 54000, Pakistan","
-+92 333 4235391","https://kingpestcontrolpk.com/","Pest control service","N/A"
-"Termite(deemak)Control Specialist Lahore.","
-House 129, Block N Block P Model Town, Lahore, 54700, Pakistan","
-+92 300 4233369","https://kingpestcontrolpk.com/","Pest control service","N/A"
-"Pearl Pest Control Services","
-19C, Bank Square Market, Model Town, Lahore, 54000, Pakistan","
-+92 311 1207618","http://pearlpestcontrol.com/","Pest control service","N/A"
-"Farmer Seed and Spray Center Adda Plot","
-Adda Plot, Raiwind Rd, opposite PSO, inside the street, Block K Fazaia Housing Society, Lahore, 54000, Pakistan","
-+92 300 4577781","https://wa.me/+923004577781","Pest control service","N/A"
-"Base Termite & Pest Control Services","
-128, Block P Model Town, Lahore, 54000, Pakistan","
-+92 300 4444679","https://basetermitecontrol.pk/","Pest control service","N/A"
-"Pesto Guard Pest & Termite Control Services","
-90 A BL N, Model Town, Lahore, 54700, Pakistan","
-+92 312 4255502","https://brotherstermite.pk/","Pest control service","N/A"
-"Pearl Pest Control","
-Pearl Corporate Building Abpara, Canal Bank Road, 53710, Pakistan","
-+92 300 0846540","https://pearlpestcontrol.com/","Pest control service","N/A"
-"C-SHINE Sustainable Solutions (A Rentokil Initial Company)","
-Paradise store, Street No 2, Sector S DHA Phase 2, Lahore, Pakistan","
-+92 322 7505108","http://www.c-shinegroup.com/","Pest control service","N/A"
-"Hafiz Pest Control","
-613 G, e.x.t Block Q Lahore, 54700, Pakistan","
-+92 300 4888279","https://hafizpestcontrol.com/","Pest control service","N/A"
-"PesTerminator","
-Sector Y, St 10, Commercial Area Sector Y DHA Phase 3, Lahore, Pakistan","
-+92 317 1117378","https://kingpestcontrolpk.com/","Pest control service","N/A"
-"Sohail Termite Control","
-160-A, Model Town, Lahore, Pakistan","
-+92 300 4545616","http://sohailtermitecontrol.com/contact/","Pest control service","N/A"
-"Nayab Pest Control Services","
-254-G1, Johar Town, Lahore, 54000, Pakistan","
-+92 300 4422468","https://www.nayabpestcontrol.com/","Pest control service","N/A"
-"Termite Control in Lahore","
-Ameer Chowk, College Road, Township Block C 1 Nespak Housing Scheme, Lahore, 54000, Pakistan","
-+92 322 4509546","http://termitecontrolinlahore.com/","Pest control service","N/A"
-"Shamsi Home Solution","
-31 E 1km Defence Road Chungi amer sidhu, Lahore – Kasur Rd, Mustafa Colony, Lahore, 54000, Pakistan","
-+92 300 0536111","https://kingpestcontrolpk.com/","Pest control service","N/A"
-"Muhafiz Fumigation & bedbugs Lahore","
-Edhi street Near Jinah hospital, 20 Street, Government Officers Residence - V Block A Faisal Town, Lahore, 54000, Pakistan","
-+92 300 9494798","https://www.muhafizpest.com/","Pest control service","N/A"
-"HASSAN CORPORATION","
-OFFICE NO 32, FIRST FLOOR, J1, COMMERCIAL MARKET, WAPDA Block J 1 Wapda Town Phase 1 TOWN, Lahore, 54000, Pakistan","
-+92 321 1119921","https://kingpestcontrolpk.com/","Pest control service","N/A"
-"Hasan Termite & Pest Control Services","
-Office 3 Khayaban-e-Jinnah, near Shuakat Khanum Hospital, WAPDA Town Block N 1 Wapda Town Phase 2 Lahore, 54000, Pakistan","
-+92 323 4400035","http://pesttrust.com/","Pest control service","N/A"
-"Rentokil Lahore (C-Shine)","","
-+92 304 1112006","https://kingpestcontrolpk.com/","Pest control service","N/A"
-"Lasani agro services","
-Shahdara More, sheikhupura road, Shahdara Town, Lahore, Pakistan","
-+92 300 4231985","https://kingpestcontrolpk.com/","Pest control service","N/A"
+name,category,rating,phone,website,address,email
+"AdvantageCare Physicians - Flatiron District Medical Office","Internist","2.8","
++1 646-680-4227","
+acpny.com","
+21 E 22nd St, New York, NY 10010, United States","N/A"
+"Deep Blue Med Spa","Medical spa","4.7","
++1 646-480-6226","
+deepbluemedspa.com","
+1040 Park Ave Suite 1BC, New York, NY 10028, United States","N/A"
+"City Derm NYC - Manhattan: Dr. Catherine Ding","Dermatologist","4.8","
++1 212-226-6866","
+citydermnyc.com","
+99 Lafayette St, Chinatown, NY 10013, United States","N/A"
+"Washington Square Dermatology","Skin care clinic","4.9","
++1 212-256-1075","
+washingtonsqderm.com","
+18 Washington Square N, New York, NY 10011, United States","N/A"
+"Pura Dermatology Hudson Yards: Dermatologist NYC, Botox, Juvederm, Dysport, Acne Treatment, Scar Removal","Dermatologist","4.9","
++1 646-706-7747","
+puradermatology.com","
+446 W 38th St, New York, NY 10018, United States","N/A"
+"New York Dermatology Group","Skin care clinic","4.7","
++1 212-533-8888","
+nydermatologygroup.com","
+119 5th Ave 4th floor, New York, NY 10003, United States","N/A"
+"Spring Street Dermatology - Uptown","Skin care clinic","4.9","
++1 646-906-9614","
+springstderm.com","
+4 W 58th St Floor 13, New York, NY 10019, United States","N/A"
+"Manhattan Dermatology","Dermatologist","4.8","
++1 212-683-6073","
+dermatologistnewyork.org","
+36 E 36th St #202, New York, NY 10016, United States","N/A"
+"SkinProvement Dermatology New York","Dermatologist","5.0","
++1 212-933-9490","
+skinprovement.com","
+110 E 40th St #402, New York, NY 10016, United States","N/A"
+"Downtown Dermatology","Skin care clinic","4.9","
++1 212-233-2995","
+downtowndermnyc.com","
+291 Broadway # 1803, New York, NY 10007, United States","N/A"
+"The Dermatology Specialists - Hell's Kitchen","Dermatologist","4.6","
++1 212-385-3700","
+thedermspecs.com","
+625 10th Ave, New York, NY 10036, United States","gkrasniqi@thedermspecs.com"
+"Goldman Dermatology","Dermatologist","4.9","
++1 212-962-1115","
+goldmandermatology.com","
+150 Broadway # 1110, New York, NY 10038, United States","N/A"
+"Laser & Mohs Dermatology of New York","Skin care clinic","4.9","
++1 212-391-8600","
+laserandmohs.com","
+501 5th Ave #604, New York, NY 10017, United States","N/A"
+"The Dermatology Specialists - Upper East Side","Dermatologist","4.6","
++1 212-385-3700","
+thedermspecs.com","
+1425 2nd Ave, New York, NY 10021, United States","ssmith3@thedermspecs.com"
+"Manhattan Dermatology","Dermatologist","4.8","
++1 212-689-9587","
+dermatologistnewyork.org","
+71 Park Ave #1A, New York, NY 10016, United States","N/A"
+"Manhattan Dermatology Specialists","Skin care clinic","4.8","
++1 212-378-9984","
+manhattandermatologistsnyc.com","
+55 W 17th St STE 103, New York, NY 10011, United States","admin@mscnyc.com"
+"The Dermatology Specialists - Union Square","Dermatologist","4.6","
++1 212-385-3700","
+thedermspecs.com","
+111 3rd Ave, New York, NY 10003, United States","anunez@thedermspecs.com"
+"The Dermatology Specialists - Downtown Brooklyn","Dermatologist","4.5","
++1 718-797-5504","
+thedermspecs.com","
+440 Atlantic Ave, Brooklyn, NY 11217, United States","kmamun@thedermspecs.com"
+"The Dermatology Specialists - Manhattan Valley","Dermatologist","4.6","
++1 212-385-3700","
+thedermspecs.com","
+2599 Broadway, New York, NY 10025, United States","mpanagiotou@thedermspecs.com"
+"Spring Street Dermatology - SOHO","Skin care clinic","4.7","
++1 646-906-9614","
+springstderm.com","
+75 Spring St Floor 2, New York, NY 10012, United States","N/A"
+"SINY Dermatology & Cosmetic Surgery","Dermatologist","4.8","
++1 718-491-5800","
+sinyderm.com","
+67 Perry St, New York, NY 10014, United States","N/A"
+"Manhattan Dermatology Specialists","Skin care clinic","4.8","
++1 212-889-2402","
+manhattandermatologistsnyc.com","
+56 W 45th St Ste 819, New York, NY 10036, United States","N/A"

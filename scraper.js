@@ -28,8 +28,7 @@ class GoogleMapsPuppeteerScraper {
       await this.page.setViewport({ width: 1920, height: 1080 });
       await this.page.setUserAgent(
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
-        "AppleWebKit/537.36 (KHTML, like Gecko) " +
-        "Chrome/118.0.0.0 Safari/537.36"
+        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
       );
       console.log("Browser launched.");
     } catch (err) {
@@ -56,15 +55,20 @@ class GoogleMapsPuppeteerScraper {
   }
 
   async _extractBusinessDetails(link) {
+    // Open a new page for details
     const detailPage = await this.browser.newPage();
     const details = {};
     try {
       await detailPage.goto(link, { waitUntil: "networkidle2", timeout: 60000 });
       await sleep(3000 + Math.random() * 1000);
+      
       try {
         const nameEl = await detailPage.$("h1");
-        if (nameEl) details.name = (await detailPage.evaluate(el => el.innerText, nameEl)).trim();
-      } catch (err) { console.error("Name error:", err); }
+        if (nameEl)
+          details.name = (await detailPage.evaluate(el => el.innerText, nameEl)).trim();
+      } catch (err) {
+        console.error("Name error:", err);
+      }
       try {
         const categorySelectors = ["button[jsaction*='category']", "span.DkEaL"];
         for (const sel of categorySelectors) {
@@ -77,7 +81,8 @@ class GoogleMapsPuppeteerScraper {
       } catch (err) { console.error("Category error:", err); }
       try {
         const ratingEl = await detailPage.$("div.jANrlb > div.fontDisplayLarge");
-        if (ratingEl) details.rating = (await detailPage.evaluate(el => el.innerText, ratingEl)).trim();
+        if (ratingEl)
+          details.rating = (await detailPage.evaluate(el => el.innerText, ratingEl)).trim();
       } catch (err) { console.error("Rating error:", err); }
       try {
         const phoneSelectors = ["button[data-item-id^='phone']", "a[href^='tel:']"];
@@ -87,7 +92,8 @@ class GoogleMapsPuppeteerScraper {
             let phoneText = await detailPage.evaluate(el => el.innerText, phoneEl);
             if (!phoneText) {
               phoneText = await detailPage.evaluate(el => el.getAttribute('href'), phoneEl);
-              if (phoneText && phoneText.startsWith("tel:")) phoneText = phoneText.replace("tel:", "");
+              if (phoneText && phoneText.startsWith("tel:"))
+                phoneText = phoneText.replace("tel:", "");
             }
             if (phoneText) { details.phone = phoneText.trim(); break; }
           }
@@ -101,31 +107,23 @@ class GoogleMapsPuppeteerScraper {
         ];
         for (const sel of websiteSelectors) {
           const siteEl = await detailPage.$(sel);
-          if (siteEl) { details.website = (await detailPage.evaluate(el => el.innerText, siteEl)).trim(); break; }
+          if (siteEl) {
+            details.website = (await detailPage.evaluate(el => el.innerText, siteEl)).trim();
+            break;
+          }
         }
       } catch (err) { console.error("Website error:", err); }
       try {
         const addressSelectors = ["button[data-item-id^='address']", "[aria-label*='address']"];
         for (const sel of addressSelectors) {
           const addrEl = await detailPage.$(sel);
-          if (addrEl) { details.address = (await detailPage.evaluate(el => el.innerText, addrEl)).trim(); break; }
+          if (addrEl) {
+            details.address = (await detailPage.evaluate(el => el.innerText, addrEl)).trim();
+            break;
+          }
         }
       } catch (err) { console.error("Address error:", err); }
-      try {
-        const emailEl = await detailPage.$("a[href^='mailto:']");
-        if (emailEl) {
-          let email = await detailPage.evaluate(el => el.getAttribute('href'), emailEl);
-          if (email) {
-            email = email.replace("mailto:", "").trim();
-            details.email = email;
-          }
-        } else {
-          const pageContent = await detailPage.content();
-          const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
-          const match = pageContent.match(emailRegex);
-          details.email = match ? match[0].trim() : "N/A";
-        }
-      } catch (err) { console.error("Email error:", err); }
+      
       console.log("Details:", details);
     } catch (error) {
       console.error("Detail page error:", error);
@@ -143,6 +141,8 @@ class GoogleMapsPuppeteerScraper {
       await this.page.goto(url, { waitUntil: "networkidle2", timeout: 60000 });
       await sleep(5000 + Math.random() * 2000);
       await this._scrollResults();
+      
+      // Get all links of business cards
       const links = await this.page.$$eval("a.hfpxzc", els => els.map(el => el.href));
       for (const link of links) {
         if (maxResults > 0 && results.length >= maxResults) break;
@@ -162,7 +162,7 @@ class GoogleMapsPuppeteerScraper {
   exportToCsv(businesses, filename = 'results.csv') {
     if (!businesses || businesses.length === 0) return false;
     try {
-      const order = ["name", "category", "rating", "phone", "website", "address", "email"];
+      const order = ["name", "category", "rating", "phone", "website", "address"];
       let csvContent = order.join(",") + "\n";
       businesses.forEach(biz => {
         const row = order.map(key => `"${(biz[key] || "").replace(/"/g, '""')}"`).join(",");
@@ -176,11 +176,11 @@ class GoogleMapsPuppeteerScraper {
       return false;
     }
   }
-
+  
   exportToXlsx(businesses, filename = 'results.xlsx') {
     if (!businesses || businesses.length === 0) return false;
     try {
-      const order = ["name", "category", "rating", "phone", "website", "address", "email"];
+      const order = ["name", "category", "rating", "phone", "website", "address"];
       const dataOrdered = businesses.map(biz => {
         const ordered = {};
         order.forEach(key => ordered[key] = biz[key] || "");
@@ -209,7 +209,7 @@ class GoogleMapsPuppeteerScraper {
 async function main() {
   const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
   const ask = question => new Promise(resolve => rl.question(question, answer => resolve(answer)));
-
+  
   const niche = await ask("Enter the business niche (category) to search for: ");
   const region = await ask("Enter the region: ");
   const qtdStr = await ask("How many companies do you want to collect? (0 for no limit): ");

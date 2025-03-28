@@ -1,89 +1,121 @@
-name,category,rating,phone,website,address,email
-"AdvantageCare Physicians - Flatiron District Medical Office","Internist","2.8","
-+1 646-680-4227","
-acpny.com","
-21 E 22nd St, New York, NY 10010, United States","N/A"
-"Deep Blue Med Spa","Medical spa","4.7","
-+1 646-480-6226","
-deepbluemedspa.com","
-1040 Park Ave Suite 1BC, New York, NY 10028, United States","N/A"
-"City Derm NYC - Manhattan: Dr. Catherine Ding","Dermatologist","4.8","
-+1 212-226-6866","
-citydermnyc.com","
-99 Lafayette St, Chinatown, NY 10013, United States","N/A"
-"Washington Square Dermatology","Skin care clinic","4.9","
-+1 212-256-1075","
-washingtonsqderm.com","
-18 Washington Square N, New York, NY 10011, United States","N/A"
-"Pura Dermatology Hudson Yards: Dermatologist NYC, Botox, Juvederm, Dysport, Acne Treatment, Scar Removal","Dermatologist","4.9","
-+1 646-706-7747","
-puradermatology.com","
-446 W 38th St, New York, NY 10018, United States","N/A"
-"New York Dermatology Group","Skin care clinic","4.7","
-+1 212-533-8888","
-nydermatologygroup.com","
-119 5th Ave 4th floor, New York, NY 10003, United States","N/A"
-"Spring Street Dermatology - Uptown","Skin care clinic","4.9","
-+1 646-906-9614","
-springstderm.com","
-4 W 58th St Floor 13, New York, NY 10019, United States","N/A"
-"Manhattan Dermatology","Dermatologist","4.8","
-+1 212-683-6073","
-dermatologistnewyork.org","
-36 E 36th St #202, New York, NY 10016, United States","N/A"
-"SkinProvement Dermatology New York","Dermatologist","5.0","
-+1 212-933-9490","
-skinprovement.com","
-110 E 40th St #402, New York, NY 10016, United States","N/A"
-"Downtown Dermatology","Skin care clinic","4.9","
-+1 212-233-2995","
-downtowndermnyc.com","
-291 Broadway # 1803, New York, NY 10007, United States","N/A"
-"The Dermatology Specialists - Hell's Kitchen","Dermatologist","4.6","
-+1 212-385-3700","
-thedermspecs.com","
-625 10th Ave, New York, NY 10036, United States","gkrasniqi@thedermspecs.com"
-"Goldman Dermatology","Dermatologist","4.9","
-+1 212-962-1115","
-goldmandermatology.com","
-150 Broadway # 1110, New York, NY 10038, United States","N/A"
-"Laser & Mohs Dermatology of New York","Skin care clinic","4.9","
-+1 212-391-8600","
-laserandmohs.com","
-501 5th Ave #604, New York, NY 10017, United States","N/A"
-"The Dermatology Specialists - Upper East Side","Dermatologist","4.6","
-+1 212-385-3700","
-thedermspecs.com","
-1425 2nd Ave, New York, NY 10021, United States","ssmith3@thedermspecs.com"
-"Manhattan Dermatology","Dermatologist","4.8","
-+1 212-689-9587","
-dermatologistnewyork.org","
-71 Park Ave #1A, New York, NY 10016, United States","N/A"
-"Manhattan Dermatology Specialists","Skin care clinic","4.8","
-+1 212-378-9984","
-manhattandermatologistsnyc.com","
-55 W 17th St STE 103, New York, NY 10011, United States","admin@mscnyc.com"
-"The Dermatology Specialists - Union Square","Dermatologist","4.6","
-+1 212-385-3700","
-thedermspecs.com","
-111 3rd Ave, New York, NY 10003, United States","anunez@thedermspecs.com"
-"The Dermatology Specialists - Downtown Brooklyn","Dermatologist","4.5","
-+1 718-797-5504","
-thedermspecs.com","
-440 Atlantic Ave, Brooklyn, NY 11217, United States","kmamun@thedermspecs.com"
-"The Dermatology Specialists - Manhattan Valley","Dermatologist","4.6","
-+1 212-385-3700","
-thedermspecs.com","
-2599 Broadway, New York, NY 10025, United States","mpanagiotou@thedermspecs.com"
-"Spring Street Dermatology - SOHO","Skin care clinic","4.7","
-+1 646-906-9614","
-springstderm.com","
-75 Spring St Floor 2, New York, NY 10012, United States","N/A"
-"SINY Dermatology & Cosmetic Surgery","Dermatologist","4.8","
-+1 718-491-5800","
-sinyderm.com","
-67 Perry St, New York, NY 10014, United States","N/A"
-"Manhattan Dermatology Specialists","Skin care clinic","4.8","
-+1 212-889-2402","
-manhattandermatologistsnyc.com","
-56 W 45th St Ste 819, New York, NY 10036, United States","N/A"
+name,category,rating,phone,website,address
+"InStyle Dental","Dentist","4.9","
++1 212-695-2173","
+instyledentalcare.com","
+450 7th Ave Suite 800, New York, NY 10123, United States"
+"Central Park West Dentistry","Dentist","4.8","
++1 212-579-8885","
+cpwdentistry.com","
+25 Central Park W Suite 1B, New York, NY 10023, United States"
+"New York Dental Office","Dentist","4.9","
++1 212-548-3261","
+newyorkdentaloffice.com","
+245 E 63rd St #110, New York, NY 10065, United States"
+"209 NYC Dental","Dentist","4.8","
++1 646-493-6891","
+209nycdental.com","
+209 E 56th St 1st floor, New York, NY 10022, United States"
+"New York General Dentistry","Dental clinic","5.0","
++1 212-838-0842","
+newyorkgeneraldentistry.com","
+133 E 58th St Ste 409, New York, NY 10022, United States"
+"Midtown Dental Care Associates","Dentist","5.0","
++1 212-685-4730","
+midtowndentalcareassociates.com","
+12 E 41st St suite 1100, New York, NY 10017, United States"
+"New York Family Dental Arts","Dentist","4.9","
++1 212-628-3300","
+dentalartsny.com","
+200 E 72nd St, New York, NY 10021, United States"
+"Diamond District Dental NYC","Dentist","4.9","
++1 212-759-5595","
+dddentalnyc.com","
+10 W 46th St #1401, New York, NY 10036, United States"
+"Expert Dental - Midtown","Dentist","4.5","
++1 212-763-3383","
+expertdentalnyc.com","
+110 E 40th St #104, New York, NY 10016, United States"
+"Midtown Dental Group Fashion District","Dentist","4.9","
++1 212-730-4440","
+midtowndentalgroup.com","
+241 W 37th St Ground Floor, New York, NY 10018, United States"
+"NYC Smile Spa","Cosmetic dentist","4.9","
++1 646-374-2242","
+nycsmilespa.com","
+30 E 60th St Suite 1201, New York, NY 10022, United States"
+"Sky Dental","Dentist","4.9","
++1 212-600-1996","
+skydentalnyc.com","
+111 Broadway Suite 1304, New York, NY 10006, United States"
+"New York DMD","Dentist","4.9","
++1 917-284-9680","
+newyorkdmd.com","
+115 E 61st St Suite 12A, New York, NY 10065, United States"
+"Pearl Dental NYC","Dental clinic","4.9","
++1 212-344-9317","
+pearldentalnyc.com","
+233 Broadway Suite 1801, New York, NY 10279, United States"
+"New York Dental Group","Dentist","5.0","
++1 212-989-5253","
+newyorkdentalgrp.com","
+24 5th Ave lobby 3, New York, NY 10011, United States"
+"The Exchange Dental Group","Dentist","4.9","
++1 212-422-9229","
+theexchangedentalgroup.com","
+39 Broadway Suite 2115, New York, NY 10006, United States"
+"Advanced Dental Arts NYC","Dentist","4.8","
++1 212-388-1170","
+advanceddentalartsnyc.com","
+55 E 9th St, New York, NY 10003, United States"
+"Park 56 Dental","Dentist","4.9","
++1 212-826-2322","
+park56dental.com","
+6th Fl, 120 E 56th St Rm 610, New York, NY 10022, United States"
+"Lumia Dental PLLC","Dentist","4.9","
++1 212-287-1275","
+lumiadental.com","
+160 Broadway # 1004, New York, NY 10038, United States"
+"Sachar Dental NYC","Dentist","5.0","
++1 212-752-1163","
+sachardental.com","
+20 E 46th St Rm 1301, New York, NY 10017, United States"
+"Wall Street Dental Spa - Financial District","Dentist","4.9","
++1 646-849-6916","
+wallstdentalspanyc.com","
+30 Wall St #720, New York, NY 10005, United States"
+"NYCDENTAL","Dentist","4.6","
++1 212-348-5492","
+nycdent.com","
+1317 3rd Ave 2nd Floor, New York, NY 10021, United States"
+"InStyle Dental","Dentist","4.9","
++1 212-695-2173","
+instyledentalcare.com","
+450 7th Ave Suite 800, New York, NY 10123, United States"
+"Central Park West Dentistry","Dentist","4.8","
++1 212-579-8885","
+cpwdentistry.com","
+25 Central Park W Suite 1B, New York, NY 10023, United States"
+"Midtown Dental Group Fashion District","Dentist","4.9","
++1 212-730-4440","
+midtowndentalgroup.com","
+241 W 37th St Ground Floor, New York, NY 10018, United States"
+"Central Park Dentistry","Dentist","4.8","
++1 212-486-6211","
+cpsdent.com","
+30 Central Park S #2b, New York, NY 10019, United States"
+"Village Dental NYC","Dentist","4.7","
++1 315-860-0238","
+villagedentalnyc.com","
+77 E 12th St, New York, NY 10003, United States"
+"New York Midtown Dental PC","Dentist","5.0","
++1 212-278-8105","
+nymidtowndental.com","
+1560 Broadway #601, New York, NY 10036, United States"
+"172 NYC Dental","Dentist","4.8","
++1 646-921-5541","
+172nycdental.com","
+172 Madison Ave Comm 1, New York, NY 10016, United States"
+"Making You Smile Cosmetic Dentist Studio NYC: Dr. Ziad Jalbout DDS","Dentist","4.9","
++1 646-846-4645","
+makingyousmile.nyc","
+36 E 36th St #1D, New York, NY 10016, United States"

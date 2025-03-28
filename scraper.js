@@ -15,15 +15,23 @@ class GoogleMapsPuppeteerScraper {
 
   async init() {
     try {
-      this.browser = await puppeteer.launch({
+      // Set executablePath: either from environment variable or default path.
+      // Update this path if your Chrome installation is located elsewhere.
+      const executablePath = process.env.CHROME_PATH || "C:/Program Files/Google/Chrome/Application/chrome.exe";
+      
+      const launchOptions = {
         headless: this.headless,
+        executablePath, 
         args: [
           '--window-size=1920,1080',
           '--no-sandbox',
           '--disable-setuid-sandbox',
           '--disable-blink-features=AutomationControlled'
-        ]
-      });
+        ],
+        timeout: 60000
+      };
+
+      this.browser = await puppeteer.launch(launchOptions);
       this.page = await this.browser.newPage();
       await this.page.setViewport({ width: 1920, height: 1080 });
       await this.page.setUserAgent(
@@ -55,7 +63,6 @@ class GoogleMapsPuppeteerScraper {
   }
 
   async _extractBusinessDetails(link) {
-    // Open a new page for details
     const detailPage = await this.browser.newPage();
     const details = {};
     try {
@@ -66,9 +73,8 @@ class GoogleMapsPuppeteerScraper {
         const nameEl = await detailPage.$("h1");
         if (nameEl)
           details.name = (await detailPage.evaluate(el => el.innerText, nameEl)).trim();
-      } catch (err) {
-        console.error("Name error:", err);
-      }
+      } catch (err) { console.error("Name error:", err); }
+      
       try {
         const categorySelectors = ["button[jsaction*='category']", "span.DkEaL"];
         for (const sel of categorySelectors) {
@@ -79,11 +85,13 @@ class GoogleMapsPuppeteerScraper {
           }
         }
       } catch (err) { console.error("Category error:", err); }
+      
       try {
         const ratingEl = await detailPage.$("div.jANrlb > div.fontDisplayLarge");
         if (ratingEl)
           details.rating = (await detailPage.evaluate(el => el.innerText, ratingEl)).trim();
       } catch (err) { console.error("Rating error:", err); }
+      
       try {
         const phoneSelectors = ["button[data-item-id^='phone']", "a[href^='tel:']"];
         for (const sel of phoneSelectors) {
@@ -95,10 +103,14 @@ class GoogleMapsPuppeteerScraper {
               if (phoneText && phoneText.startsWith("tel:"))
                 phoneText = phoneText.replace("tel:", "");
             }
-            if (phoneText) { details.phone = phoneText.trim(); break; }
+            if (phoneText) { 
+              details.phone = phoneText.trim(); 
+              break; 
+            }
           }
         }
       } catch (err) { console.error("Phone error:", err); }
+      
       try {
         const websiteSelectors = [
           "a[data-item-id^='authority']",
@@ -107,19 +119,20 @@ class GoogleMapsPuppeteerScraper {
         ];
         for (const sel of websiteSelectors) {
           const siteEl = await detailPage.$(sel);
-          if (siteEl) {
-            details.website = (await detailPage.evaluate(el => el.innerText, siteEl)).trim();
-            break;
+          if (siteEl) { 
+            details.website = (await detailPage.evaluate(el => el.innerText, siteEl)).trim(); 
+            break; 
           }
         }
       } catch (err) { console.error("Website error:", err); }
+      
       try {
         const addressSelectors = ["button[data-item-id^='address']", "[aria-label*='address']"];
         for (const sel of addressSelectors) {
           const addrEl = await detailPage.$(sel);
-          if (addrEl) {
-            details.address = (await detailPage.evaluate(el => el.innerText, addrEl)).trim();
-            break;
+          if (addrEl) { 
+            details.address = (await detailPage.evaluate(el => el.innerText, addrEl)).trim(); 
+            break; 
           }
         }
       } catch (err) { console.error("Address error:", err); }
@@ -142,7 +155,7 @@ class GoogleMapsPuppeteerScraper {
       await sleep(5000 + Math.random() * 2000);
       await this._scrollResults();
       
-      // Get all links of business cards
+      // Get all links of business cards (using the selector "a.hfpxzc")
       const links = await this.page.$$eval("a.hfpxzc", els => els.map(el => el.href));
       for (const link of links) {
         if (maxResults > 0 && results.length >= maxResults) break;

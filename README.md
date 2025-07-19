@@ -1,109 +1,91 @@
 
 ---
- 
-# Google Map Scraper
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Node.js CI](https://github.com/Faheem798/Google-Map-Scraper/actions/workflows/nodejs.yml/badge.svg)](https://github.com/Faheem798/Google-Map-Scraper/actions)
+# 🗺️ Google Maps Business Scraper
 
-Google Map Scraper is a sophisticated, stealth-enhanced scraper built using Puppeteer‑extra with the Stealth Plugin. Designed for extracting detailed business data from Google Maps, it retrieves key information such as business name, category, rating, phone, website, address, and email. The scraper simulates human-like behavior with randomized delays and scrolling patterns to minimize detection, then exports the results to both CSV and XLSX formats.
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+![Node.js CI](https://github.com/Faheem798/Google-Map-Scraper/actions/workflows/nodejs.yml/badge.svg)
 
----
-
-## ✨ Features
-
-- **Stealth-Enhanced Browsing:**  
-  Built with Puppeteer‑extra and the Stealth Plugin, the scraper employs advanced techniques to reduce detection by mimicking genuine user behavior.
-
-- **Dynamic Data Extraction:**  
-  Extracts critical business details in the order of Name, Category, Rating, Phone, Website, Address, and Email.
-
-- **Human-Like Interaction:**  
-  Incorporates random delays and scrolling patterns to simulate a real user's browsing behavior, further lowering the risk of detection.
-
-- **Dual Data Export:**  
-  Saves the scraped data in both CSV and Excel (XLSX) formats for easy analysis and reporting.
+Google Maps Business Scraper is a simple yet powerful tool built with Puppeteer and stealth plugins to extract businesses from Google Maps. You can get business name, category, rating, phone, website, and address, then export the data as CSV or Excel.
 
 ---
 
-## 🚀 Installation
+## 🚀 Installation (Beginners Friendly)
 
-### Prerequisites
+### 1. 📦 Requirements
 
-- **Node.js:**  
-  Ensure you have Node.js installed (v14 or later is recommended). You can download it from [nodejs.org](https://nodejs.org/).
+- **Node.js** (v14 or above)  
+  ➤ Download and install from [https://nodejs.org](https://nodejs.org)
 
-- **Required Packages:**  
-  Install the necessary packages in your project directory:
-  ```bash
-  npm install puppeteer-extra puppeteer-extra-plugin-stealth xlsx
-  ```
-  Note: `readline` and `fs` are built into Node.js.
+### 2. 📁 Clone the Repository
 
-### Clone the Repository
-
-Clone the repository from GitHub:
 ```bash
 git clone https://github.com/Faheem798/Google-Map-Scraper.git
 cd Google-Map-Scraper
 ```
 
----
+### 3. 🔨 Install Dependencies
 
-## 🔧 Usage
+Run the following command to install required packages:
 
-### Running the Scraper
+```bash
+npm install puppeteer-extra puppeteer-extra-plugin-stealth xlsx
+```
 
-1. **Customize Your Search:**  
-   Run the script with Node.js. The program will prompt you to enter:
-   - The business niche (e.g., "yoga studio", "hotel")
-   - The region (e.g., "NYC", "Lahore")
-   - The maximum number of companies to scrape (enter 0 for no limit)
+## 🧑‍💻 How to Use
 
-   ```bash
-   node scraper.js
-   ```
+Run the script using Node.js:
 
-2. **Undetectable Scraping:**  
-   The script launches a stealth-enabled browser, navigates to Google Maps, and uses human-like scrolling and delays. It collects detailed business data while minimizing detection risks.
+```bash
+node scraper.js
+```
 
-3. **Data Export:**  
-   Once completed, the data is automatically exported to:
-   - `results.csv` – a CSV file
-   - `results.xlsx` – an Excel workbook  
-   Both files are saved in the **Output** folder.
+You will be asked to:
 
-### Code Structure
+- Enter business type (e.g. `restaurants`, `gyms`)
+- Enter region (e.g. `New York`, `Lahore`)
+- How many businesses to scrape (0 = all)
+- Headless mode (yes = invisible browser)
+- Export format: CSV, Excel, or Both
 
-- **Initialization (`init()`):**  
-  Sets up Puppeteer‑extra with stealth settings, launches the browser, and configures the viewport and user agent.
+🟢 After confirmation, the scraper will:
 
-- **Human-Like Navigation:**  
-  The `_scrollResults()` method simulates natural scrolling with randomized delays to load additional entries.
+1. Launch Google Maps in a browser
+2. Search and scroll like a human
+3. Visit each business page to extract:
+   - Name
+   - Category
+   - Rating
+   - Phone
+   - Website
+   - Address
 
-- **Data Extraction:**  
-  The `_extractBusinessDetails()` method navigates to each business detail page and extracts fields in the order:  
-  **Name, Category, Rating, Phone, Website, Address, Email**  
-  It uses multiple selectors for each field to increase reliability.
+📁 Scraped data will be saved in the `/Output` folder as:
 
-- **Export Functions:**  
-  The functions `exportToCsv()` and `exportToXlsx()` save the scraped data in your chosen format while maintaining a fixed field order.
-
----
-
-## 💡 Contributing
-
-Contributions are welcome! Feel free to fork the repository, make improvements, and open a pull request. Please include appropriate tests and documentation with your changes.
+- `businesses_<timestamp>.csv`
+- `businesses_<timestamp>.xlsx`
 
 ---
 
-## 📄 License
+## 📂 Folder Structure
 
-This project is licensed under the [MIT License](LICENSE).
+```
+Google-Map-Scraper/
+├── scraper.js         # Main script
+├── Output/            # Saved results
+├── README.md          # This file
+└── package.json       # Dependencies
+```
 
 ---
 
-## 📣 Acknowledgments
+## 🙌 Contributing
+
+Feel free to fork this repo, suggest improvements, or open pull requests. Bug fixes, better selectors, and UX improvements are always welcome!
+
+---
+
+## 🙏 Credits
 
 - Inspired by advanced web scraping techniques using Puppeteer‑extra and stealth enhancements.
 - Special thanks to the open-source community for providing excellent tools and libraries.

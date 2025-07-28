@@ -215,12 +215,12 @@ class GoogleMapsPuppeteerScraper {
         }
         
         
-        const phoneSelectors = [
+const phoneSelectors = [
           "button[data-item-id^='phone']",
           "a[href^='tel:']",
           "button[aria-label*='phone']"
         ];
-        
+       
         for (const selector of phoneSelectors) {
           try {
             const phoneEl = await detailPage.$(selector);
@@ -230,6 +230,7 @@ class GoogleMapsPuppeteerScraper {
                 if (phoneText.startsWith("tel:")) {
                   phoneText = phoneText.replace("tel:", "");
                 }
+                phoneText = phoneText.replace(//g, '');
                 details.phone = phoneText.trim();
                 break;
               }
@@ -366,7 +367,9 @@ class GoogleMapsPuppeteerScraper {
           try {
             const addrEl = await detailPage.$(selector);
             if (addrEl) {
-              details.address = (await detailPage.evaluate(el => el.innerText, addrEl)).trim();
+              let addressText = (await detailPage.evaluate(el => el.innerText, addrEl)).trim();
+              addressText = addressText.replace(//g, '');
+              details.address = addressText.trim();
               break;
             }
           } catch (err) {
